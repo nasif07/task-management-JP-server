@@ -26,7 +26,14 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
+    const taskCollection = client.db("taskCollectionDB").collection("allAddedTask")
 
+
+    app.post('/alltasks', async (req, res) => {
+      const taskQuery = req.body;
+      const result = await taskCollection.insertOne(taskQuery);
+      res.send(result)
+    });
     
 
 
